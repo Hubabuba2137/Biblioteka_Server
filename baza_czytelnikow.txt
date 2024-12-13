@@ -1,0 +1,2 @@
+1 Hubert Stach admin@onet Rzemieslnicza 12121 login root
+2 Czesław Maj 1@1 1 1 1 1

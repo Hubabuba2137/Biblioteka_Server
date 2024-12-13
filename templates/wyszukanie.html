@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Wyszukiwanie książek</title>
+    <meta charset="UTF-8">
+    <script>
+        async function searchBooks(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            const response = await fetch('/api/wyszukaj', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            const output = document.getElementById('result');
+            output.innerHTML = '';
+
+            if (response.ok) {
+                output.innerHTML = `
+                    <p><strong>Tytuł:</strong> ${result.tytul}</p>
+                    <p><strong>Autor:</strong> ${result.autor}</p>
+                    <p><strong>ISBN:</strong> ${result.ISBN}</p>
+                `;
+            } else {
+                output.innerHTML = `<p style="color: red;">${result.message || 'Nie znaleziono książki.'}</p>`;
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+        }
+
+        nav{
+            float: left;
+            width: 20%;
+            padding: 28px;
+        }
+
+        nav ul{
+            list-style-type: none;
+            padding: 0%;
+        }
+
+        article{
+            float: left;
+            padding: 20px;
+            width: 80%;
+        }
+
+        footer{
+            
+            padding:  10px;
+            text-align: center;
+            
+        }
+
+        @media (max-width: 600px) {
+            nav, article {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header><h1>Książkomat</h1></header>
+    <section>
+        <nav>
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="main.html">Strona główna</a></li>
+                <li><a href="logowanie.html">Zaloguj się</a></li>
+                <li><a href="rejestracja.html">Stwórz konto</a></li>
+                <li><a href="wyszukanie.html">Wyszukaj książkę</a></li>
+            </ul>
+        </nav>
+
+        <article>
+            <h2>Wyszukaj książke</h2>
+            <p>Możesz wyszukać książkę poprzez jej tytuł lub numer ISBN</p>
+            <form onsubmit="searchBooks(event)">
+                <label for="typ">Szukaj po:</label>
+                <select name="typ" id="typ">
+                    <option value="tytul">Tytule</option>
+                    <option value="isbn">ISBN</option>
+                </select>
+                <br>
+                <label for="wartosc">Wartość:</label>
+                <input type="text" name="wartosc" id="wartosc" required>
+                <br>
+                <button type="submit">Szukaj</button>
+            </form>
+            <div id="result"></div>
+        </article>
+    </section>
+</body>
+</html>

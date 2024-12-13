@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Książkomat</title>
+    <meta charset="UTF-8">
+    <script>
+        async function sendData(event, endpoint) {
+            event.preventDefault();
+            const formData = new FormData(event.target); // Pobierz dane z formularza
+            const data = Object.fromEntries(formData.entries()); // Zamień na obiekt
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                alert('Wystąpił błąd.');
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+        }
+
+        nav{
+            float: left;
+            width: 20%;
+            padding: 28px;
+        }
+
+        nav ul{
+            list-style-type: none;
+            padding: 0%;
+        }
+
+        article{
+            float: left;
+            padding: 20px;
+            width: 80%;
+        }
+
+        footer{
+            
+            padding:  10px;
+            text-align: center;
+            
+        }
+
+        @media (max-width: 600px) {
+            nav, article {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header><h1>Książkomat</h1></header>
+    <section>
+        <nav>
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="main.html">Strona główna</a></li>
+                <li><a href="logowanie.html">Zaloguj się</a></li>
+                <li><a href="rejestracja.html">Stwórz konto</a></li>
+                <li><a href="wyszukanie.html">Wyszukaj książkę</a></li>
+            </ul>
+        </nav>
+
+        <article>
+            <h2>Strona główna</h2>
+            <h3>Czym jest Książkomat?</h3>
+            <p>Książkomat to prosty i wygodny sposób na pożyczanie książek, które chcesz, kiedy chcesz.</p>
+            <p>Wypożyczasz książkę i odbierasz ją w automacie, my robimy całą magię.
+            </p>
+        </article>
+
+    </section>
+</body>
+</html>
