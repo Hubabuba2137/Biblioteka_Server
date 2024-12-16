@@ -96,9 +96,20 @@ int main()
 		});
 
 	CROW_ROUTE(app, "/wyszukanie_log.html")
-		([](const crow::request& req) {
-		auto page = crow::mustache::load_text("wyszukanie_log.html");
-		return page;
+		([&sessions](const crow::request& req) {
+		std::string sessionID = req.get_header_value("Cookie");
+		sessionID.erase(0, 10);//usuwamy prefiks sessionID=
+		std::string login;
+	
+		if (!sessionID.empty() && sessions.count(sessionID)) {
+			login = sessions[sessionID];
+		}
+	
+		auto page = crow::mustache::load("wyszukanie_log.html");
+		crow::mustache::context ctx;
+		ctx["login"] = login;
+	
+		return page.render(ctx);
 			});
 
 	CROW_ROUTE(app, "/api/login").methods(crow::HTTPMethod::POST)([&baza_uzytkownikow, &sessions](const crow::request& req) {\
