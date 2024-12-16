@@ -8,7 +8,7 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData.entries());
-            const response = await fetch('/api/wyszukaj', {
+            const response = await fetch('/api/wyszukaj_log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
@@ -24,6 +24,8 @@
                     <p><strong>Tytuł:</strong> ${result.tytul}</p>
                     <p><strong>Autor:</strong> ${result.autor}</p>
                     <p><strong>ISBN:</strong> ${result.ISBN}</p>
+
+                    <button type="submit">Wypozycz</button>
                 `;
             } else {
                 output.innerHTML = `<p style="color: red;">${result.message || 'Nie znaleziono książki.'}</p>`;
@@ -84,10 +86,9 @@
         <nav>
             <h3>Menu</h3>
             <ul>
-                <li><a href="main.html">Strona główna</a></li>
-                <li><a href="logowanie.html">Zaloguj się</a></li>
-                <li><a href="rejestracja.html">Stwórz konto</a></li>
-                <li><a href="wyszukanie.html">Wyszukaj książkę</a></li>
+                <li><a href="main_log.html">Strona główna</a></li>
+                <li><a href="main.html">Wyloguj się</a></li>
+                <li><a href="wyszukanie_log.html">Wyszukaj książkę</a></li>
             </ul>
         </nav>
 
