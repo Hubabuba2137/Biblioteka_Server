@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Wyszukiwanie książek - Książkomat</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(90deg, #5a5a9f, #8975d1);
+            color: white;
+            padding: 30px;
+            font-size: 35px;
+            text-align: center;
+            border-radius: 8px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        nav {
+            float: left;
+            width: 20%;
+            height: 100vh;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+        }
+
+        nav ul li a {
+            color: #5a5a9f;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #5a5a9f;
+            color: white;
+            border-radius: 4px;
+        }
+
+        article {
+            float: left;
+            width: 75%;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-left: 5%;
+        }
+
+        footer {
+            clear: both;
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input, form select, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        form button {
+            background-color: #5a5a9f;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #8975d1;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header><h1>Książkomat</h1></header>
+    <section>
+        <nav>
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="main.html"><i class="fas fa-home"></i> Strona główna</a></li>
+                <li><a href="logowanie.html"><i class="fas fa-sign-in-alt"></i> Zaloguj się</a></li>
+                <li><a href="rejestracja.html"><i class="fas fa-user-plus"></i> Stwórz konto</a></li>
+                <li><a href="wyszukanie.html"><i class="fas fa-search"></i> Wyszukaj książkę</a></li>
+            </ul>
+        </nav>
+        <article>
+            <h2 style="text-align: center; font-size: 40px;">Wyszukaj książkę</h2>
+            <form onsubmit="searchBooks(event)">
+                <label for="typ">Szukaj po:</label>
+                <select id="typ" name="typ">
+                    <option value="tytul">Tytule</option>
+                    <option value="isbn">ISBN</option>
+                </select>
+
+                <label for="wartosc">Wartość:</label>
+                <input type="text" id="wartosc" name="wartosc" required>
+
+                <button type="submit">Szukaj</button>
+            </form>
+            <div id="result">Wyniki wyszukiwania pojawią się tutaj...</div>
+        </article>
+    </section>
+    <footer>
+        <p>&copy; 2024 Książkomat. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>
